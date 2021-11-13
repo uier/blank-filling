@@ -12,6 +12,7 @@
       >
     </div>
     <div class="mt-5 text-gray-500">Press enter to submit.</div>
+    <div class="mt-5 text-gray-500">Submit "idk" to reveal answer.</div>
   </div>
 </template>
 

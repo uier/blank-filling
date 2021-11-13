@@ -4,7 +4,7 @@
     <div class="text-2xl">{{ data[index].Q }}</div>
   </div>
   <Input class="mt-16" :error="error" @submit="submit" />
-  <div class="mt-3" v-show="cnt > 2">
+  <div class="mt-3" v-show="reveal">
     {{ data[index].A.join(', ') }}
   </div>
 </template>
@@ -27,19 +27,23 @@ export default {
     }
     const index = ref(genIndex())
     const error = ref(false)
-    const cnt = ref(0)
+    const reveal = ref(false)
     const submit = (answer, cb) => {
+      if ( answer === 'idk' ) {
+        cb()
+        reveal.value = true
+        return
+      }
+      reveal.value = false
       if ( data[index.value].A.includes(answer) ) {
-        cnt.value = 0
         cb()
         index.value = genIndex()
       } else {
         error.value = true
-        cnt.value += 1
-        setTimeout(() => error.value = false, 1500)
+        setTimeout(() => error.value = false, 1000)
       }
     }
-    return { index, data, submit, error, cnt }
+    return { index, data, submit, error, reveal }
   },
 }
 </script>
