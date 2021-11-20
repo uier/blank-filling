@@ -29,6 +29,7 @@ export default {
     const error = ref(false)
     const reveal = ref(false)
     const submit = (answer, cb) => {
+      if ( answer === '' ) return
       if ( answer === 'idk' ) {
         cb()
         reveal.value = true
